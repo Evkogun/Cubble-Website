@@ -39,11 +39,19 @@
 
   /* push the message to the left, icons to the right */
   .banner-content {
-    flex: 1;
+    flex: 1;               /* take up all available space */
+    display: flex;         /* make its children line up in a row */
+    align-items: center;   
+    gap: 1rem;             
   }
   .banner-icons {
     display: flex;
     gap: 12px;
+  }
+
+  .banner-content p,
+  .banner-content a {
+    margin: 0;           
   }
 
   /* Squares that change colour on hover */
