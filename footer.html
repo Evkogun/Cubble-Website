@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="js/moblilecheck.js"></script>
+  <title>Page with Footer</title>
+  <link rel="stylesheet" href="footer.css" />
+</head>
+<body>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>Cubble</h2>
+        <p>Making the dating scene a healthier place</p>
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+    </div>
+    <div class="footer-social">
+        <a href="https://twitter.com" aria-label="Twitter">Twitter</a>
+        <a href="https://facebook.com" aria-label="Facebook">Facebook</a>
+        <a href="https://instagram.com" aria-label="Instagram">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
