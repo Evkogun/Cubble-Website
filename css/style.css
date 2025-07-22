@@ -91,9 +91,17 @@
     justify-content: center;
   }
 
+  html.is-mobile #banner .banner-content a {
+    display: none;
+  }
 
+  .mobile-only {
+    display: none;
+  }
 
-
+  html.is-mobile .mobile-only {
+    display: inline-flex; /* or inline-block, whatever fits */
+  }
 
 
 
