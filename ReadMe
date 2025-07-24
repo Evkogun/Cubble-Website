@@ -1,0 +1,5 @@
+Run this to install dependencies
+npm install
+
+Use this command to test how your page looks with banner/footer
+npx webpack serve --config webpack.config.dev.js
