@@ -11,10 +11,9 @@
 
   updateMobileClass(mql);
 
-  // listen for changes
   if (typeof mql.addEventListener === 'function') {
     mql.addEventListener('change', updateMobileClass);
   } else {
-    mql.addListener(updateMobileClass);  // older browsers comp
+    mql.addListener(updateMobileClass);
   }
 })();

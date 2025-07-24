@@ -1,12 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  entry: {
-    app: './js/app.js',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    filename: './js/app.js',
-  },
-};
+  context: path.resolve(__dirname, 'src'),
+
+  entry: {banner: './js/banner.js',}, output: { path: path.resolve(__dirname, 'dist'), filename: 'js/banner.js',clean: true},};

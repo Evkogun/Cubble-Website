@@ -32,7 +32,6 @@
     z-index: 1000;
   }
 
-  /*Makes the banner appear when scrolling up (look in app.js)*/
   #banner.visible {
     transform: translateY(0);
   }

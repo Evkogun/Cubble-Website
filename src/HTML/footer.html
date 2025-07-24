@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="js/moblilecheck.js"></script>
+  <script src="../js/mobilecheck.js"></script>
   <title>Page with Footer</title>
-  <link rel="stylesheet" href="footer.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
 </head>
 <body>
   <footer class="site-footer">
@@ -24,7 +24,7 @@
       </nav>
     </div>
     <div class="footer-legal">
-      <p>&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> Cubble. All rights reserved.</p>
     </div>
     <div class="footer-social">
         <a href="https://twitter.com" aria-label="Twitter">Twitter</a>
@@ -36,5 +36,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <div id="footer-container"></div>
+  <script src="../js/footer.js"></script>
 </body>
 </html>
