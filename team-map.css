@@ -1,0 +1,137 @@
+html, body, #map {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* legend */
+#legend {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  z-index: 1000;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+#legend:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+#legend strong {
+  display: block;
+  margin-bottom: 8px; /* space below title */
+}
+
+#legend label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+
+#legend input[type="checkbox"] {
+  margin-right: 6px;
+  width: 16px;
+  height: 16px;
+  accent-color: #0077cc; /* cool colour? */
+}
+
+/* category */
+.legend-dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.legend-dot.business { background: #1b9e77; }
+.legend-dot.technical { background: #9467bd; }
+.legend-dot.psychology { background: #7570b3; }
+.legend-dot.unknown { background: #e7298a; }
+
+/* popup */
+
+.leaflet-popup-content-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  padding: 12px 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  color: #222;
+  min-width: 220px;
+}
+
+.popup-content h4 {
+  margin: 0 0 14px 0;
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 18px;
+  border-bottom: 2px solid #0077cc;
+  padding-bottom: 6px;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-content li {
+  margin-bottom: 8px;
+  display: inline;
+  align-items: center;
+  line-height: 1.3;
+}
+
+.popup-content a {
+  color: #0077cc;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  flex-grow: 1;
+  margin-right: 8px;
+}
+
+.popup-content a:hover {
+  color: #005fa3;
+  text-decoration: underline;
+}
+
+.category {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin-left: 6px;
+}
+
+/* tooltip */
+.custom-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  pointer-events: none;
+  font-weight: 500;
+}
+
+/* hover animations */
+input[type="checkbox"]:hover + span,
+.legend-dot:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
