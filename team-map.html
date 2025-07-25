@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>Intern Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="team-map.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+</head>
+<body>
+
+  <div id="map">
+    <div id="legend">
+    <strong>Departments in Cubble</strong><br>
+    <label>
+      <input type="checkbox" id="chkAll" checked>
+      <span>Select All</span>
+    </label><br>
+
+    <label>
+      <input type="checkbox" id="chkBusiness" checked>
+      <span class="legend-dot business"></span> Business
+    </label><br>
+
+    <label>
+      <input type="checkbox" id="chkTechnical" checked>
+      <span class="legend-dot technical"></span> Technical
+    </label><br>
+
+    <label>
+      <input type="checkbox" id="chkPsychology" checked>
+      <span class="legend-dot psychology"></span> Psychology
+    </label><br>
+
+    <label>
+      <input type="checkbox" id="chkUnknown" checked>
+      <span class="legend-dot unknown"></span> Unknown
+    </label>
+  </div>
+
+  </div>
+  
+  <script src="team-map.js"></script>
+  
+  <script>
+    const map = L.map('map', {
+      center: [40, 20],
+      zoom: 2,
+      minZoom: 3,
+      maxZoom: 8,
+      worldCopyJump: true, // allows infinite horizontal scrolling and keeps markers
+      // removed map boundary
+      doubleClickZoom: false // Disabled since disabling the legend sometimes misinterpreted as double
+    });
+
+    const bounds = map.getBounds();
+    console.log(bounds); // southwest and northeast corners
+
+    const center = map.getCenter();
+    console.log(center); // lat:... lng:...
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', 
+    {
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+      noWrap: false // ensures tiles repeat horizontally 
+    }).addTo(map);
+
+    const categoryColoursHex = {
+      Business:               0x1b9e77,
+      Technical:              0x9467bd,
+      Psychology:             0x7570b3,
+      Unknown:                0xe7298a,
+
+      // Two‑way blends (average of component colours)
+      // Identifiers cannot have commas
+      "Business, Psychology":  0x4887cd,
+      "Business, Technical":   0x5883d2,
+      "Technical, Business":   0x5883d2,
+      "Business, Unknown":     0x8164b9,
+      "Technical, Psychology": 0x856cb8,
+      "Technical, Unknown":    0xbe48a4
+    };
+
+    /*
+      Basic conversion, easier to store hexes than strings
+    */
+    function hexToCss(num) {
+      return '#' + num.toString(16).padStart(6, '0');
+    }
+
+    /*
+      Averages over an array of hexes, dividing them up into 3 colour groups and averaging these
+    */
+    function avgHex(hexes){ 
+      if (!hexes.length) return '#000000';
+
+      const sums = [0, 0, 0];
+
+      hexes.forEach(h => {
+        const hex = h.replace(/^#/, '');
+        sums[0] += parseInt(hex.substr(0, 2), 16);
+        sums[1] += parseInt(hex.substr(2, 2), 16);
+        sums[2] += parseInt(hex.substr(4, 2), 16);
+      });
+
+      const n = hexes.length;
+      const result = sums.map(sum => Math.round(sum / n).toString(16).padStart(2, '0')).join('');
+      return `#${result}`;
+    }
+
+    function lightenHex(hex, percent = 0.5) {
+      
+      const c = hex.replace(/^#/, '');
+      const num = parseInt(c, 16);
+      let r = (num >> 16) & 0xff;
+      let g = (num >>  8) & 0xff;
+      let b =  num        & 0xff;
+      // blend each channel towards 255
+      r = Math.round(r + (255 - r) * percent);
+      g = Math.round(g + (255 - g) * percent);
+      b = Math.round(b + (255 - b) * percent);
+      // reassemble
+      return '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+    }
+   
+    const clusterGroup = L.markerClusterGroup({ // Creates a group that auto clusters when you zoom out
+      iconCreateFunction: function(cluster) { // Tells it to draw the bubble icon instead of default
+        const markers = cluster.getAllChildMarkers(); // Retrieves all of the children merged into this cluster
+        const colours = markers.map(m => m.options.fillColor); // Retrieves the set fill colour
+        const clusterColor = avgHex(colours); // Takes an average of the retreived colours to make a representative colour
+        const count = markers.reduce((sum, m) => sum + (m.people?.length || 0), 0); // sum up all people arrays on each marker
+        const size = count < 10 ? 'small' : count < 50 ? 'medium' : 'large'; // Use that to decide the size of the cluster
+        const className = 'marker-cluster marker-cluster-' + size; // The default settings with this also add a traffic light colour system
+        return new L.DivIcon({ // Draws the clusters (50% makes it a circle) (checks same type and value)
+          html: `<div style="
+                    background-color: ${lightenHex(clusterColor, 0.2)};
+                    width:  ${size === 'small' ? 40:(size === 'medium' ? 50:60)} px;
+                    height: ${size === 'small' ? 40:(size === 'medium' ? 50:60)} px;
+                    line-height: ${size === 'small' ? 40 :(size === 'medium' ? 50:60)} px;
+                    border-radius: 50%; 
+                  ">
+                  ${count}
+                </div>`,
+          className,
+          iconSize: null
+        });
+      }
+    });
+
+    const allMarkers = []; // Holds all markers for showing/hiding
+
+    locations.forEach(([lat, lon, label, people]) => { // Loops over each location
+      // colour calculated based on categories of people in location
+        const colours = people.map(p =>hexToCss(categoryColoursHex[p.category] || categoryColoursHex.Unknown));
+        const colour = avgHex(colours);
+
+        // build list of linkedin profiles with their connecting names
+        const linksHtml = people.map(p => `
+          <li>
+            <a href="${p.linkedin}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+          </li>
+        `).join('');
+
+         
+         const popupHtml = ` 
+        <div class="popup-content">
+          <h4>${label}</h4>
+          <ul>${linksHtml}</ul>
+        </div>
+      `;
+
+
+      const marker = L.circleMarker([lat, lon], {
+        radius: 5,
+        color: colour,
+        fillColor: colour,
+        fillOpacity: 1
+      }).bindPopup(popupHtml); // Circle marker creation
+
+      // when you hover over a marker
+
+      marker.on('mouseover', function () {
+        // get currently selected categories
+        const visible = getVisibleCategories();
+        // filter people to show only those whose category is visible
+        const visPeople = people.filter(p => visible.has(p.category));
+        // if no visble people remain after filtering, close tooltip and exit 
+        if (visPeople.length === 0) {
+          this.closeTooltip();
+          return;
+        }
+        // names in a string
+        const namesList = visPeople.map(p => p.name).join(', ');
+        const tooltipHtml = `${label}<br><em>${namesList}</em>`;
+        // bring tooltip to marker
+        this.bindTooltip(tooltipHtml, {
+        direction: 'top', // above marker
+        opacity: 0.95, // slight transparency
+        className: 'custom-tooltip' // custom CSS 
+        }).openTooltip();
+      });
+      // pop up when clicked
+      marker.on('click', function () {
+        const visible = getVisibleCategories(); // currently selected
+        const visPeople = people.filter(p => visible.has(p.category)); // filter
+        // if nobody there, close popup and exit 
+        if (visPeople.length === 0) {
+          this.closePopup();
+          return;
+        }
+
+  const popupHtml = `<strong>${label}</strong><br>` +
+                    visPeople.map(p => `<a href="${p.linkedin}" target="_blank">${p.name}</a>`).join('<br>');
+  this.bindPopup(popupHtml).openPopup();
+});
+
+      
+      // Marker on mouseclick didn't seem to work
+
+      marker.people = people;        
+      allMarkers.push(marker);
+      clusterGroup.addLayer(marker);
+    });
+
+    map.addLayer(clusterGroup);
+    function getVisibleCategories() { // sorry, format change
+      return new Set(
+        ['Business','Technical','Psychology','Unknown']
+        .filter(cat => document.getElementById('chk' + cat).checked)
+      );
+    }
+
+    function updateMarkersVisibility() {
+      const visible = getVisibleCategories(); // This area had a bit of compression for readability
+      allMarkers.forEach(marker => {
+        const anyVisible = marker.people.some(p => visible.has(p.category));
+        if (!anyVisible) {
+          clusterGroup.removeLayer(marker);
+        } else {
+          const hex = avgHex(
+            marker.people
+              .filter(p => visible.has(p.category))
+              .map(p => hexToCss(categoryColoursHex[p.category] || categoryColoursHex.Unknown))
+          );
+          marker.setStyle({ color:'#000', fillColor:hex, fillOpacity:1 });
+          clusterGroup.addLayer(marker);
+        }
+      });
+    }
+    // some of the stuff such as html variable got moved around, had to change a lot to integrate into cluster logic
+    const categories = ['Business','Technical','Psychology','Unknown'];
+    const chkAll = document.getElementById('chkAll');
+
+    chkAll.addEventListener('change', () => {
+      categories.forEach(cat => {
+        document.getElementById('chk' + cat).checked = chkAll.checked;
+      });
+      updateMarkersVisibility();
+    });
+
+    categories.forEach(cat => {
+      document.getElementById('chk' + cat).addEventListener('change', () => {
+        chkAll.checked = categories.every(c => document.getElementById('chk' + c).checked);
+        updateMarkersVisibility();
+      });
+    });
+  </script>
+</body>
+</html>
