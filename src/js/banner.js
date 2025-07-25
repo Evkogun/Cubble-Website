@@ -2,9 +2,14 @@ function injectBanner() {
   return fetch('/banner.html')
     .then(res => res.text())
     .then(html => {
-      document
-        .getElementById('banner-container')
-        .innerHTML = html;
+      document.getElementById('banner-container').innerHTML = html;
+
+      const envelopeBtn = document.querySelector('.envelope-btn');
+      if (envelopeBtn) {
+        envelopeBtn.addEventListener('click', () => {
+          window.location.href = 'signUp.html';
+        });
+      }
     });
 }
 
