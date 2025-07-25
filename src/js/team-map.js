@@ -77,7 +77,7 @@ const locations = [
     { name: 'Abhinav', linkedin: 'https://www.linkedin.com/in/theabhinavkaushik', category: 'Business' },
     { name: 'Sakshi', linkedin: 'https://www.linkedin.com/in/sakshi-902777290/', category: 'Technical, Psychology' }
   ]],
-  [12.9629, 77575, 'Bengaluru, India', [{ name: 'Kunal Bist', linkedin: 'https://www.linkedin.com/in/kunal-bist-994a30224', category: 'Business' }]],
+  [12.9629, 77.575, 'Bengaluru, India', [{ name: 'Kunal Bist', linkedin: 'https://www.linkedin.com/in/kunal-bist-994a30224', category: 'Business' }]],
   [22.9868, 87.8550, 'West Bengal, India', [{ name: 'Rajat Sharma', linkedin: 'https://www.linkedin.com/in/rajat-sharma-447841109?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', category: 'Business' }]],
   [7.2527, 80.3418, 'Kegalle, Sri Lanka', [{ name: 'Dulith', linkedin: 'https://www.linkedin.com/in/dulith-chandira', category: 'Technical' }]],
   [3.1319, 101.6841, 'Kuala Lumpur, Malaysia', [

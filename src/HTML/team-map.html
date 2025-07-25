@@ -238,16 +238,12 @@
     function updateMarkersVisibility() {
       const visible = getVisibleCategories(); // This area had a bit of compression for readability
       allMarkers.forEach(marker => {
-        const anyVisible = marker.people.some(p => visible.has(p.category));
+        const anyVisible = marker.people.some(p => p.category.split(/\s*,\s*/).some(cat => visible.has(cat))); // Adjusted to handle multiple categories
         if (!anyVisible) {
           clusterGroup.removeLayer(marker);
         } else {
-          const hex = avgHex(
-            marker.people
-              .filter(p => visible.has(p.category))
-              .map(p => hexToCss(categoryColoursHex[p.category] || categoryColoursHex.Unknown))
-          );
-          marker.setStyle({ color:'#000', fillColor:hex, fillOpacity:1 });
+          const hex = avgHex(marker.people.filter(p => p.category.split(/\s*,\s*/).some(cat => visible.has(cat))).map(p => hexToCss(categoryColoursHex[p.category] || categoryColoursHex.Unknown)));
+          marker.setStyle({stroke: false, fillColor: hex, fillOpacity: 1});
           clusterGroup.addLayer(marker);
         }
       });
