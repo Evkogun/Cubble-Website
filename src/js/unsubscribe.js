@@ -18,10 +18,4 @@ const email = document.getElementById("email").value.trim();
     alert('Unsubscribed successfully');
     document.getElementById('unsubscribeForm').reset();
   }
-
-
-
-
-
-
 })
