@@ -81,3 +81,22 @@ html.is-mobile .footer-nav,
 html.is-mobile .footer-social {
   text-align: center;
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#banner-container~*:not(#footer-container) {
+  flex: 1 0 auto;
+}
+
+#footer-container {
+  margin-top: auto;
+}
