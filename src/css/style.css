@@ -7,141 +7,25 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
-
-
-
-  /* Banner */
-  #banner {
-  /* Button and banner customisation*/
-  --banner-bg: #ddd;
-  --buttun-bg: #faf;
-  --banner-bg-light: #e8e8e8;
-  --button-bg-light: rgb(255, 200, 255);
-
-    position: fixed;
-    top: 0;
-    left: 0;
+  html, body, #root {
+    height: 100%;
     width: 100%;
-    height: 60px;
-    background: var(--banner-bg);
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    z-index: 1000;
+    margin: 0;
+    padding: 0;
   }
 
-  #banner.visible {
-    transform: translateY(0);
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  /* push the message to the left, icons to the right */
-  .banner-content {
-    flex: 1;               /* take up all available space */
-    display: flex;         /* make its children line up in a row */
-    align-items: center;   
-    gap: 1rem;             
-  }
-  .banner-icons {
-    display: flex;
-    gap: 12px;
-  }
 
-  .banner-content p,
-  .banner-content a {
-    margin: 0;           
-  }
-
-  /* Squares that change colour on hover */
-  .icon-btn {
-    position: relative;
-    left: var(--btn-offset, 0);
-    background-color: var(--buttun-bg);
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  /* Change colour on hover */
-  .icon-btn:hover {
-    background-color: var(--button-bg-light);
-  }
-
-  /* Image */
-  #main-image {
-    width: 100%;
-    height: calc(100vh - 80pt);
-    background-color: #e0e0e0;   /* placeholder color */
-    margin-top: 0px;            /* needs to be behind banner as banner flickers when loading in */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #stuff-we-do {
-    width: 100%;
-    padding: 40px 0;
-    background: #f5f5f5;
-  }
-
-  #stuff-we-do h2 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: 2rem;
-  }
-
-  .stuff-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-
-  .stuff-box {
-    width: 33.3333%;
-    padding: 10px;
+  *, *::before, *::after {
     box-sizing: border-box;
   }
 
-  .stuff-box > div {
-    background: white;
-    border-radius: 16px;
-    padding: 10px;
-    height: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-
-  html.is-mobile .stuff-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  html.is-mobile .stuff-box {
-    width: 90%; 
-  }
-
-  html.is-mobile #banner .banner-content a {
-    display: none;
-  }
-
-  .mobile-only {
-    display: none;
-  }
-
-  html.is-mobile .mobile-only {
-    display: inline-flex; /* or inline-block, whatever fits */
-  }
-
-
-
-
-  /*This stuff is from the template*/
-
- /* ==========================================================================
-   Base styles: opinionated defaults
+/* ========================================================================== 
+   Base styles: opinionated defaults 
    ========================================================================== */
 
 html {
@@ -149,13 +33,6 @@ html {
   font-size: 1em;
   line-height: 1.4;
 }
-
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Customize the background color to match your design.
- */
 
 ::-moz-selection {
   background: #b3d4fc;
@@ -167,10 +44,6 @@ html {
   text-shadow: none;
 }
 
-/*
- * A better looking default horizontal rule
- */
-
 hr {
   display: block;
   height: 1px;
@@ -179,12 +52,6 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
-
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
 
 audio,
 canvas,
@@ -195,49 +62,24 @@ video {
   vertical-align: middle;
 }
 
-/*
- * Remove default fieldset styles.
- */
-
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
-
 textarea {
   resize: vertical;
 }
 
-/* ==========================================================================
-   Author's custom styles
+/* ========================================================================== 
+   Helper classes 
    ========================================================================== */
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
 
 .hidden,
 [hidden] {
   display: none !important;
 }
-
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
 
 .visually-hidden {
   border: 0;
@@ -249,14 +91,7 @@ textarea {
   position: absolute;
   white-space: nowrap;
   width: 1px;
-  /* 1 */
 }
-
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
 
 .visually-hidden.focusable:active,
 .visually-hidden.focusable:focus {
@@ -269,20 +104,9 @@ textarea {
   width: auto;
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
 .invisible {
   visibility: hidden;
 }
-
-/*
- * Clearfix: contain floats
- *
- * The use of `table` rather than `block` is only necessary if using
- * `::before` to contain the top-margins of child elements.
- */
 
 .clearfix::before,
 .clearfix::after {
@@ -294,10 +118,8 @@ textarea {
   clear: both;
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
+/* ========================================================================== 
+   EXAMPLE Media Queries for Responsive Design. 
    ========================================================================== */
 
 @media only screen and (min-width: 35em) {
@@ -311,10 +133,8 @@ textarea {
   /* Style adjustments for high resolution devices */
 }
 
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
+/* ========================================================================== 
+   Print styles 
    ========================================================================== */
 
 @media print {
@@ -323,7 +143,6 @@ textarea {
   *::after {
     background: #fff !important;
     color: #000 !important;
-    /* Black prints faster */
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -341,10 +160,6 @@ textarea {
     content: " (" attr(title) ")";
   }
 
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
   a[href^="#"]::after,
   a[href^="javascript:"]::after {
     content: "";
@@ -377,4 +192,3 @@ textarea {
     page-break-after: avoid;
   }
 }
-

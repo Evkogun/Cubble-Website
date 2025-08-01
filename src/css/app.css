@@ -22,9 +22,14 @@ body {
 .carousel-track {
     display: flex;
     gap: 32px;
+    width: max-content;
+}
+
+.carousel-track.animate-scroll {
     animation: scroll-cards 12s linear infinite;
     will-change: transform;
 }
+
 @keyframes scroll-cards {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
