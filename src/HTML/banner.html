@@ -21,6 +21,12 @@
       left: 0;
       right: 0;
       z-index: 1000;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    #banner.visible {
+      transform: translateY(0);
     }
 
     .banner-content {
