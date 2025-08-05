@@ -106,6 +106,35 @@ html.is-mobile .stuff-box {
   color: #555;
 }
 
+.bubble-section {
+  position: relative;
+  background: #ffffff;
+}
+
+#bubble-container {
+  position: sticky;
+  top: 50%;
+  width: 100vw;
+  height: 100vh;
+  overflow: visible;
+}
+
+.bubble {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #3717eb;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s ease-out;
+  z-index: 10;
+}
+
 #how-it-works {
   padding: 60px 20px;
   background-color: #ffffff;
