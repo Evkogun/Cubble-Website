@@ -135,6 +135,52 @@ html.is-mobile .stuff-box {
   z-index: 10;
 }
 
+.bubble.active {
+  z-index: 50;
+  transition: transform 0.5s cubic-bezier(.8,2,.6,1), box-shadow 0.3s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(1.4);
+}
+
+.bubble.inactive {
+  opacity: 0.5;
+  transform: scale(0.75) !important;
+  transition: transform 0.5s, opacity 0.4s;
+}
+
+#bubble-detail {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 32px rgba(80, 50, 140, 0.14);
+  padding: 2.2rem 1.5rem 1.5rem;
+  text-align: center;
+  z-index: 99;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: opacity 0.2s, transform 0.4s;
+}
+
+#bubble-detail.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+#bubble-detail img {
+  width: 72px; height: 72px; margin-bottom: 10px; border-radius: 50%;
+  background: #f8f0ff;
+}
+
+#bubble-detail-close {
+  position: absolute; top: 8px; right: 14px; background: none;
+  border: none; font-size: 2rem; color: #a855f7; cursor: pointer;
+}
+
 #how-it-works {
   padding: 60px 20px;
   background-color: #ffffff;

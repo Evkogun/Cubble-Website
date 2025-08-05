@@ -68,13 +68,20 @@
 
       <section class="bubble-section">
         <div id="bubble-container">
-          <div class="bubble" data-angle="0">1</div>
-          <div class="bubble" data-angle="72">2</div>
-          <div class="bubble" data-angle="144">3</div>
-          <div class="bubble" data-angle="216">4</div>
-          <div class="bubble" data-angle="288">5</div>
+        <div class="bubble" data-angle="0" data-title="Chat Safely" data-text="Start genuine group conversations." data-img="chat.png">1</div>
+        <div class="bubble" data-angle="72" data-title="Find Friends" data-text="Meet people who share your interests." data-img="friends.png">2</div>
+        <div class="bubble" data-angle="144" data-title="AI Help" data-text="Smart prompts for easier intros." data-img="ai.png">3</div>
+        <div class="bubble" data-angle="216" data-title="Meet IRL" data-text="Turn chats into real meetups." data-img="meetup.png">4</div>
+        <div class="bubble" data-angle="288" data-title="Verified Safe" data-text="Trust and safety, always." data-img="safe.png">5</div>
         </div>
       </section>
+
+      <div id="bubble-detail" class="hidden">
+        <img id="bubble-detail-img" src="" alt="" />
+        <h3 id="bubble-detail-title"></h3>
+        <p id="bubble-detail-text"></p>
+        <button id="bubble-detail-close">×</button>
+      </div>
 
       <div id="how-it-works">
         <h2>How Cubble Works</h2>
