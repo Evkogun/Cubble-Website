@@ -1,84 +1,85 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const bubbles = document.querySelectorAll('.bubble');
-  const container = document.querySelector('.bubble-section');
-  const detail = document.getElementById('bubble-detail');
-  const detailTitle = document.getElementById('bubble-detail-title');
-  const detailText = document.getElementById('bubble-detail-text');
-  const detailImg = document.getElementById('bubble-detail-img');
-  const detailClose = document.getElementById('bubble-detail-close');
 
-  if (!container) return;
+  // If you are reading this you should not be here
 
-  bubbles.forEach((bubble) => {
-    bubble.dataset.startX = Math.random() * window.innerWidth;
-    bubble.dataset.startY = Math.random() * window.innerHeight;
+  const bubbles = document.querySelectorAll('.bubble'); // Bubble instance
+  const container = document.querySelector('.bubble-section'); // Used to measure relative position
+  let activeBubble = null; // Central bubble defining
+
+  bubbles.forEach(bubble => { // Assigns initial spacing on the page (not too close to the edge)
+    bubble.dataset.startX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
+    bubble.dataset.startY = (0.1 + 0.8 * Math.random()) * window.innerHeight;
   });
 
-  let activeBubble = null;
-
   window.addEventListener('scroll', () => {
-    if (activeBubble) return;
+    if (activeBubble) {
+      activeBubble.classList.remove('active'); // This removes the central circle if you scroll, preventing freezing
+      activeBubble.style.transform = '';
+      const img = activeBubble.querySelector('.bubble-img');
+      if (img) img.src = '';
+      activeBubble = null;
+    }
 
-    const containerTop = container.offsetTop;
-    const scrollY = window.scrollY;
-    const offsetStart = 500;
-    const scrollMultiplier = 4;
-    const rawProgress = (scrollY - (containerTop - offsetStart)) / window.innerHeight;
+    const scrollY = window.scrollY; // Ye
+    const offsetStart = 400; // When the animation starts playing
+    const scrollMultiplier = 4; // How fast the animation plays relative to scroll progress
+    const rawProgress = (scrollY - (container.offsetTop - offsetStart)) / window.innerHeight;
     const progress = Math.min(1, Math.max(0, rawProgress * scrollMultiplier));
 
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     const radius = 400;
 
-    bubbles.forEach((bubble) => {
+    // Set up click handlers to open/close each bubble
+    bubbles.forEach(bubble => {
       bubble.classList.remove('active', 'inactive');
-      const angleDeg = parseFloat(bubble.dataset.angle);
-      const angleRad = (angleDeg * Math.PI) / 180;
-      const startX = parseFloat(bubble.dataset.startX);
+      const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180; // Radian converter
+      const startX = parseFloat(bubble.dataset.startX); // Retrieves previously assigned co-ords
       const startY = parseFloat(bubble.dataset.startY);
-      const targetX = centerX + radius * Math.cos(angleRad);
+      const targetX = centerX + radius * Math.cos(angleRad); // Calculate circle position
       const targetY = centerY + radius * Math.sin(angleRad);
-      const currentX = startX + progress * (targetX - startX);
+      const currentX = startX + progress * (targetX - startX); // Calulate where it is between start and circle
       const currentY = startY + progress * (targetY - startY);
-      bubble.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
+      bubble.style.transform = `translate(${currentX}px, ${currentY}px)`; // CSS shorthand to move elements (had to look this up)
     });
   });
 
-  bubbles.forEach((bubble) => {
-    bubble.addEventListener('click', (e) => {
-      e.stopPropagation();
-      activeBubble = bubble;
+  bubbles.forEach(bubble => {
+    bubble.addEventListener('click', e => {
+      e.stopPropagation(); // Prevent document click from immediately closing
 
-      bubbles.forEach((b) => {
-        if (b === bubble) {
-          b.classList.add('active');
-          b.classList.remove('inactive');
-          b.style.transform = ''; 
-        } 
-      });
+      if (activeBubble && activeBubble !== bubble) {
+        activeBubble.classList.remove('active'); // Close previous active bubbles to allow for new ones
+        activeBubble.style.transform = '';
+        activeBubble = null;
+        window.dispatchEvent(new Event('scroll')); // First co-ordinate logic again to prevent 0, 0 position
+      }
 
-      detailTitle.textContent = bubble.dataset.title;
-      detailText.textContent = bubble.dataset.text;
-      detailImg.src = bubble.dataset.img;
-      detailImg.alt = bubble.dataset.title;
-      detail.classList.remove('hidden');
+      bubble.style.transform = ''; // Clear lingering elements
+
+      const willOpen = !bubble.classList.contains('active'); // Active check
+      bubble.classList.toggle('active', willOpen); // Activates with active check
+      activeBubble = willOpen ? bubble : null;
+
+      if (willOpen) {
+        const img = bubble.querySelector('.bubble-img');
+        img.src = bubble.dataset.img; // Loads image from CSS
+        img.alt = bubble.dataset.title;
+      } else {
+        bubble.querySelector('.bubble-img').src = ''; // Error prevention
+      }
     });
   });
 
-  detailClose.addEventListener('click', (e) => {
-    e.stopPropagation();
-    detail.classList.add('hidden');
-    activeBubble = null;
-    bubbles.forEach((b) => b.classList.remove('active', 'inactive'));
-    window.dispatchEvent(new Event('scroll'));
-  });
 
-  detail.addEventListener('click', (e) => {
-    if (e.target === detail) {
-      detail.classList.add('hidden');
+  window.addEventListener('click', () => {
+    if (activeBubble) {
+      activeBubble.classList.remove('active'); // Used to reset the active bubble when another area is clicked
       activeBubble = null;
-      bubbles.forEach((b) => b.classList.remove('active', 'inactive'));
-      window.dispatchEvent(new Event('scroll'));
     }
+    window.dispatchEvent(new Event('scroll')); // Without this it resets to the top left corner
   });
 });
+
+
+/* —————————————————————————————— get baited lol, I tend to remove these from others work to save face if I ever use this on my github portfolio —————————————————————————————— */
