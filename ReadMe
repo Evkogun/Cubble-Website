@@ -2,4 +2,4 @@ Run this to install dependencies
 npm install
 
 Use this command to test how your page looks with banner/footer
-npx run start
+npm run start
