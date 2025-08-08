@@ -34,18 +34,19 @@
       align-items: center;
       gap: 30px;
       padding: 15px 30px;
+      position: relative;
     }
 
     .banner-content p {
       margin: 0;
       font-weight: bold;
       font-size: 20px;
+      margin-right: auto;
     }
 
     .banner-nav {
       display: flex;
       gap: 10px;
-      margin-left: auto;
       margin-right: 30px;
     }
 
@@ -88,6 +89,44 @@
       background-color: rgba(0, 123, 255, 0.15);
     }
 
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      background-color: white;
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 8px 0;
+    }
+
+    .mobile-menu a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .mobile-menu a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .banner-nav {
+        display: none;
+      }
+      .mobile-menu {
+        left: auto;
+        right: 20px;
+      }
+    }
+
     @media (min-width: 769px) {
       .mobile-only {
         display: none;
@@ -107,9 +146,16 @@
       </nav>
       <button class="icon-btn envelope-btn" aria-label="Messages">✉️</button>
       <button class="icon-btn user-btn" aria-label="Profile">👤</button>
-      <button class="icon-btn menu-btn mobile-only" aria-label="Menu">☰</button>
+      <button class="icon-btn menu-btn mobile-only" id="hamburger-button" aria-label="Menu">☰</button>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="apps.html">Apps</a>
+        <a href="about.html">About Us</a>
+      </div>
     </div>
   </div>
+
 </body>
 
 </html>

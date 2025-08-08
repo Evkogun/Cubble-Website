@@ -10,8 +10,23 @@ function injectBanner() {
           window.location.href = 'signUp.html';
         });
       }
+      const hamburgerButton = document.getElementById('hamburger-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (hamburgerButton && mobileMenu) {
+        hamburgerButton.addEventListener('click', (event) => {
+          event.stopPropagation();
+          mobileMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (event) => {
+          if (mobileMenu.classList.contains('active') && !mobileMenu.contains(event.target) && !hamburgerButton.contains(event.target)) {
+            mobileMenu.classList.remove('active');
+          }
+        });
+      }
     });
-}
+}      
 
 function initBannerScroll() {
   const banner = document.getElementById('banner');
