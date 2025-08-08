@@ -3,13 +3,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // If you are reading this you should not be here
 
   const bubbles = document.querySelectorAll('.bubble'); // Bubble instance
+  const bubbles_main = document.querySelector('.bubble-section-content');
   const container = document.querySelector('.bubble-section'); // Used to measure relative position
   let activeBubble = null; // Central bubble defining
 
-  bubbles.forEach(bubble => { // Assigns initial spacing on the page (not too close to the edge)
-    bubble.dataset.startX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
-    bubble.dataset.startY = (0.1 + 0.8 * Math.random()) * window.innerHeight;
-  });
+  function initBubbles() {
+    bubbles.forEach((bubble, i) => {
+      // Assigns initial spacing on the page (not too close to the edge)
+      bubble.dataset.startX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
+      bubble.dataset.startY = (0.1 + 0.8 * Math.random()) * window.innerHeight;
+      bubble.dataset.angle = (i / bubbles.length) * 360;
+
+      // Set up click handler for this bubble
+      bubble.addEventListener('click', e => {
+        e.stopPropagation(); // Prevent document click from immediately closing
+
+        if (activeBubble && activeBubble !== bubble) {
+          activeBubble.classList.remove('active'); // Close previous active bubbles to allow for new ones
+          activeBubble.style.transform = '';
+          activeBubble = null;
+          window.dispatchEvent(new Event('scroll')); // First co-ordinate logic again to prevent 0, 0 position
+        }
+
+        bubble.style.transform = ''; // Clear lingering elements
+
+        const willOpen = !bubble.classList.contains('active'); // Active check
+        bubble.classList.toggle('active', willOpen); // Activates with active check
+        activeBubble = willOpen ? bubble : null;
+
+        if (willOpen) {
+          const img = bubble.querySelector('.bubble-img');
+          img.src = bubble.dataset.img; // Loads image from CSS
+          img.alt = bubble.dataset.title;
+        } else {
+          bubble.querySelector('.bubble-img').src = ''; // Error prevention
+        }
+      });
+    });
+  }
+
+  initBubbles();
 
   window.addEventListener('scroll', () => {
     if (activeBubble) {
@@ -25,52 +58,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollMultiplier = 4; // How fast the animation plays relative to scroll progress
     const rawProgress = (scrollY - (container.offsetTop - offsetStart)) / window.innerHeight;
     const progress = Math.min(1, Math.max(0, rawProgress * scrollMultiplier));
+    const progressMerge = rawProgress * scrollMultiplier;
 
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     const radius = 400;
+    if (!document.body.classList.contains('merged')){
+      bubbles.forEach(bubble => {
+        bubble.classList.remove('active', 'inactive');
+        const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180; // Radian converter
+        const startX = parseFloat(bubble.dataset.startX); // Retrieves previously assigned co-ords
+        const startY = parseFloat(bubble.dataset.startY);
+        const targetX = centerX + radius * Math.cos(angleRad); // Calculate circle position
+        const targetY = centerY + radius * Math.sin(angleRad);
+        const currentX = startX + progress * (targetX - startX); // Calulate where it is between start and circle
+        const currentY = startY + progress * (targetY - startY);
+        bubble.style.transform = `translate(${currentX}px, ${currentY}px)`; // CSS shorthand to move elements (had to look this up)
+      });
+    }
 
-    // Set up click handlers to open/close each bubble
-    bubbles.forEach(bubble => {
-      bubble.classList.remove('active', 'inactive');
-      const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180; // Radian converter
-      const startX = parseFloat(bubble.dataset.startX); // Retrieves previously assigned co-ords
-      const startY = parseFloat(bubble.dataset.startY);
-      const targetX = centerX + radius * Math.cos(angleRad); // Calculate circle position
-      const targetY = centerY + radius * Math.sin(angleRad);
-      const currentX = startX + progress * (targetX - startX); // Calulate where it is between start and circle
-      const currentY = startY + progress * (targetY - startY);
-      bubble.style.transform = `translate(${currentX}px, ${currentY}px)`; // CSS shorthand to move elements (had to look this up)
-    });
+      if (progressMerge > 2 && !document.body.classList.contains('merged')) {
+        document.body.classList.add('merged');
+        document.querySelector('.bubble-section-content').classList.add('visible');
+
+        bubbles.forEach(bubble => {
+          bubble.style.transition = 'all 0.8s ease';
+          bubble.style.transform = `translate(${centerX}px, ${centerY}px) scale(0.2)`; 
+        });
+
+        bubbles_main.style.transition = 'all 1s ease';
+        bubbles_main.style.transform = `translate(-50%, -50%) scale(1)`;
+        bubbles_main.classList.add('visible');
+
+        bubbles.forEach(bubble => {
+          bubble.style.opacity = '0';
+        });
+
+      } else if (progress < 1 && document.body.classList.contains('merged')) {
+      document.body.classList.remove('merged');
+      document.querySelector('.bubble-section-content').classList.remove('visible');
+
+      bubbles.forEach((bubble) => {
+        bubble.style.transition = 'all 0.8s ease';
+        bubble.style.opacity = '1';
+        const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180;
+        const startX = parseFloat(bubble.dataset.startX);
+        const startY = parseFloat(bubble.dataset.startY);
+        const targetX = centerX + radius * Math.cos(angleRad);
+        const targetY = centerY + radius * Math.sin(angleRad);
+        const currentX = startX + progress * (targetX - startX);
+        const currentY = startY + progress * (targetY - startY);
+        bubble.style.transform = `translate(${centerX}px, ${centerY}px) translate(-50%, -50%) scale(0.2)`;
+      });
+    }
   });
-
-  bubbles.forEach(bubble => {
-    bubble.addEventListener('click', e => {
-      e.stopPropagation(); // Prevent document click from immediately closing
-
-      if (activeBubble && activeBubble !== bubble) {
-        activeBubble.classList.remove('active'); // Close previous active bubbles to allow for new ones
-        activeBubble.style.transform = '';
-        activeBubble = null;
-        window.dispatchEvent(new Event('scroll')); // First co-ordinate logic again to prevent 0, 0 position
-      }
-
-      bubble.style.transform = ''; // Clear lingering elements
-
-      const willOpen = !bubble.classList.contains('active'); // Active check
-      bubble.classList.toggle('active', willOpen); // Activates with active check
-      activeBubble = willOpen ? bubble : null;
-
-      if (willOpen) {
-        const img = bubble.querySelector('.bubble-img');
-        img.src = bubble.dataset.img; // Loads image from CSS
-        img.alt = bubble.dataset.title;
-      } else {
-        bubble.querySelector('.bubble-img').src = ''; // Error prevention
-      }
-    });
-  });
-
 
   window.addEventListener('click', () => {
     if (activeBubble) {
@@ -79,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.dispatchEvent(new Event('scroll')); // Without this it resets to the top left corner
   });
-});
 
+});
 
 /* —————————————————————————————— get baited lol, I tend to remove these from others work to save face if I ever use this on my github portfolio —————————————————————————————— */
