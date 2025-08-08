@@ -228,6 +228,53 @@ html.is-mobile .stuff-box {
   display: block;
 }
 
+
+body.merged .bubble {
+  border-radius: 50%;
+}
+
+.bubble-section-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;         
+  height: 160px;        
+  background: #3717eb;  
+  color: black;
+  border-radius: 50%;   
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 
+    border-radius 0.6s ease,
+    transform 0.6s ease,
+    background-color 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 60;
+}
+
+body.merged .bubble-section-content {
+  border-radius: 16px;     
+  width: 300px;           
+  height: 200px;            
+  background: #5a3ce3;      
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  padding: 2rem;
+  transition-timing-function: cubic-bezier(.8,2,.6,1);
+}
+
+.bubble-section-content.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
 #how-it-works {
   padding: 60px 20px;
   background-color: #ffffff;
