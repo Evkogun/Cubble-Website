@@ -240,7 +240,7 @@ class CardSwipeManager {
       state.currentIndex = originalLength;
       this.updateSliderTransform(container, false);
     } else if (state.currentIndex < originalLength) {
-      state.currentIndex = state.totalCards - originalLength * 2;
+      state.currentIndex = state.totalCards - originalLength - 1;
       this.updateSliderTransform(container, false);
     }
   }

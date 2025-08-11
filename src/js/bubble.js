@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const scrollY = window.scrollY; // Ye
-    const offsetStart = 400; // When the animation starts playing
+    const offsetStart = -800; // When the animation starts playing
     const scrollMultiplier = 4; // How fast the animation plays relative to scroll progress
     const rawProgress = (scrollY - (container.offsetTop - offsetStart)) / window.innerHeight;
     const progress = Math.min(1, Math.max(0, rawProgress * scrollMultiplier));
