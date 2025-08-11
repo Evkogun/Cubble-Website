@@ -60,8 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = Math.min(1, Math.max(0, rawProgress * scrollMultiplier));
     const progressMerge = rawProgress * scrollMultiplier;
 
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+    const rect = container.getBoundingClientRect();
+    const centreX = rect.left + rect.width / 2;
+    const centreY = window.innerHeight / 2;
     const radius = 400;
     if (!document.body.classList.contains('merged')){
       bubbles.forEach(bubble => {
@@ -69,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180; // Radian converter
         const startX = parseFloat(bubble.dataset.startX); // Retrieves previously assigned co-ords
         const startY = parseFloat(bubble.dataset.startY);
-        const targetX = centerX + radius * Math.cos(angleRad); // Calculate circle position
-        const targetY = centerY + radius * Math.sin(angleRad);
+        const targetX = centreX + radius * Math.cos(angleRad); // Calculate circle position
+        const targetY = centreY + radius * Math.sin(angleRad);
         const currentX = startX + progress * (targetX - startX); // Calulate where it is between start and circle
         const currentY = startY + progress * (targetY - startY);
-        bubble.style.transform = `translate(${currentX}px, ${currentY}px)`; // CSS shorthand to move elements (had to look this up)
+        bubble.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`; // CSS shorthand to move elements
       });
     }
 
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bubbles.forEach(bubble => {
           bubble.style.transition = 'all 0.8s ease';
-          bubble.style.transform = `translate(${centerX}px, ${centerY}px) scale(0.2)`; 
+          bubble.style.transform = `translate(${centreX}px, ${centreY}px) translate(-50%, -50%) scale(0.2)`; 
         });
 
         bubbles_main.style.transition = 'all 1s ease';
@@ -104,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const angleRad = (parseFloat(bubble.dataset.angle) * Math.PI) / 180;
         const startX = parseFloat(bubble.dataset.startX);
         const startY = parseFloat(bubble.dataset.startY);
-        const targetX = centerX + radius * Math.cos(angleRad);
-        const targetY = centerY + radius * Math.sin(angleRad);
+        const targetX = centreX + radius * Math.cos(angleRad);
+        const targetY = centreY + radius * Math.sin(angleRad);
         const currentX = startX + progress * (targetX - startX);
         const currentY = startY + progress * (targetY - startY);
-        bubble.style.transform = `translate(${centerX}px, ${centerY}px) translate(-50%, -50%) scale(0.2)`;
+        bubble.style.transform = `translate(${centreX}px, ${centreY}px) translate(-50%, -50%) scale(0.2)`;
       });
     }
   });
