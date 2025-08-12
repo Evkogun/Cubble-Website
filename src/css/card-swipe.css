@@ -46,7 +46,7 @@
   position: relative;
   opacity: 0;
   transform: translateY(30px);
-  animation: slideInFromTop 1s ease 0.2s forwards;
+  animation: slideInFromBottom 1s ease 0.2s forwards;
 }
 
 #stuff-we-do > h2::after {
@@ -594,6 +594,7 @@
   }
 }
 
+/*
 @keyframes slideInFromTop {
   from {
     opacity: 0;
@@ -604,6 +605,7 @@
     transform: translateY(0);
   }
 }
+  */
 
 @keyframes slideInFromBottom {
   from {

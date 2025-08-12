@@ -137,3 +137,11 @@ body.merged .bubble-section-content {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
+
+.filler-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(45, 241, 255, 1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
