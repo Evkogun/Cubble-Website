@@ -1,6 +1,6 @@
 .bubble-section {
   position: relative;
-  background: #ffffff;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.25) 0%, rgba(0, 230, 118, 0.25) 50%, rgba(91, 77, 242, 0.25) 100%);
 }
 
 #bubble-container {
@@ -15,7 +15,7 @@
   position: absolute;
   width: 80px;
   height: 80px;
-  background: #3717eb;
+  background: linear-gradient(135deg, #2196F3 0%, #00E676 100%);
   border-radius: 50%;
   color: white;
   font-size: 20px;
@@ -26,80 +26,75 @@
   transition: transform 0.5s ease-out;
   z-index: 10;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .bubble.active {
   z-index: 50;
   transition: transform 0.5s cubic-bezier(.8,2,.6,1), box-shadow 0.3s;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(3);
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(6);
 }
 
-.bubble.inactive {
-  opacity: 0.5;
-  transform: scale(0.75) !important;
-  transition: transform 0.5s, opacity 0.4s;
+.bubble.active .bubble-number {
+  display: none;
 }
 
-#bubble-detail {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 340px;
-  max-width: 92vw;
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 10px 32px rgba(80, 50, 140, 0.14);
-  padding: 2.2rem 1.5rem 1.5rem;
-  text-align: center;
-  z-index: 99;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  transition: opacity 0.2s, transform 0.4s;
-}
-
-#bubble-detail.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.9);
-}
-
-#bubble-detail img {
-  width: 72px; 
-  height: 72px; 
-  margin-bottom: 10px; 
-  border-radius: 50%;
-  background: #f8f0ff;
-}
-
-#bubble-detail-close {
-  position: absolute; 
-  top: 8px; 
-  right: 14px; 
-  background: none;
-  border: none; 
-  font-size: 2rem; 
-  color: #a855f7; 
-  cursor: pointer;
-}
-
-.bubble .bubble-img {
+.bubble-inner-content {
   display: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 60%;
-  height: 60%;
-  object-fit: cover;
   transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.2s;
 }
 
-.bubble.active .bubble-img {
-  display: block;
+.bubble.active .bubble-inner-content {
+  display: flex;
+  opacity: 1;
 }
 
-body.merged .bubble {
-  border-radius: 50%;
+.bubble-img {
+  width: 40%;
+  height: 30%;
+  object-fit: cover;
+  border-radius: 10px;
+  position: absolute;
+  top: 7.5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble-title {
+  position: absolute;
+  top: 35%; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.3rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.bubble-text {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.25rem;
+  margin: 0;
+  line-height: 1.4;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  max-width: 80%;
+  text-align: center;
 }
 
 .bubble-section-content {
@@ -128,10 +123,10 @@ body.merged .bubble {
 }
 
 body.merged .bubble-section-content {
-  border-radius: 16px;     
-  width: 300px;           
-  height: 200px;            
-  background: #5a3ce3;      
+  border-radius: 0;     
+  width: 100%;           
+  height: 100%;            
+  background: linear-gradient(135deg, #2196F3 0%, #00E676 100%);     
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   padding: 2rem;

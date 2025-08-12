@@ -138,7 +138,7 @@ html.is-mobile .stuff-box {
 
 #how-it-works {
   padding: 60px 20px;
-  background-color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 48, 133, 0.25) 0%, rgba(91, 77, 242, 0.25) 50%, rgba(33, 150, 243, 0.25) 100%);
   text-align: center;
 }
 

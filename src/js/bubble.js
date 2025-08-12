@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeBubble && activeBubble !== bubble) {
           activeBubble.classList.remove('active'); // Close previous active bubbles to allow for new ones
           activeBubble.style.transform = '';
+          // Clear previous bubble content
+          const prevImg = activeBubble.querySelector('.bubble-img');
+          const prevTitle = activeBubble.querySelector('.bubble-title');
+          const prevText = activeBubble.querySelector('.bubble-text');
+          if (prevImg) prevImg.src = '';
+          if (prevTitle) prevTitle.textContent = '';
+          if (prevText) prevText.textContent = '';
           activeBubble = null;
           window.dispatchEvent(new Event('scroll')); // First co-ordinate logic again to prevent 0, 0 position
         }
@@ -32,11 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
         activeBubble = willOpen ? bubble : null;
 
         if (willOpen) {
+          // Populate all content when opening
           const img = bubble.querySelector('.bubble-img');
-          img.src = bubble.dataset.img; // Loads image from CSS
-          img.alt = bubble.dataset.title;
+          const title = bubble.querySelector('.bubble-title');
+          const text = bubble.querySelector('.bubble-text');
+          
+          if (img) {
+            img.src = bubble.dataset.img; // Loads image from CSS
+            img.alt = bubble.dataset.title;
+          }
+          if (title) {
+            title.textContent = bubble.dataset.title;
+          }
+          if (text) {
+            text.textContent = bubble.dataset.text;
+          }
         } else {
-          bubble.querySelector('.bubble-img').src = ''; // Error prevention
+          // Clear content when closing
+          const img = bubble.querySelector('.bubble-img');
+          const title = bubble.querySelector('.bubble-title');
+          const text = bubble.querySelector('.bubble-text');
+          if (img) img.src = '';
+          if (title) title.textContent = '';
+          if (text) text.textContent = '';
         }
       });
     });
@@ -49,7 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
       activeBubble.classList.remove('active'); // This removes the central circle if you scroll, preventing freezing
       activeBubble.style.transform = '';
       const img = activeBubble.querySelector('.bubble-img');
+      const title = activeBubble.querySelector('.bubble-title');
+      const text = activeBubble.querySelector('.bubble-text');
       if (img) img.src = '';
+      if (title) title.textContent = '';
+      if (text) text.textContent = '';
       activeBubble = null;
     }
 
@@ -117,6 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('click', () => {
     if (activeBubble) {
       activeBubble.classList.remove('active'); // Used to reset the active bubble when another area is clicked
+      const img = activeBubble.querySelector('.bubble-img');
+      const title = activeBubble.querySelector('.bubble-title');
+      const text = activeBubble.querySelector('.bubble-text');
+      if (img) img.src = '';
+      if (title) title.textContent = '';
+      if (text) text.textContent = '';
       activeBubble = null;
     }
     window.dispatchEvent(new Event('scroll')); // Without this it resets to the top left corner
