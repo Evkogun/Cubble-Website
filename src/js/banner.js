@@ -32,6 +32,16 @@ function injectBanner() {
         });
       }
 
+      const closeBtn = document.getElementById("closeBtn");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          const notificationBar = document.getElementById("notificationBar");
+          if (notificationBar) notificationBar.remove();
+          const banner = document.getElementById("banner");
+          if (banner) banner.style.top = "0";
+        });
+      }
+
       // --- Countdown logic ---
       const now = new Date();
       const currentYear = now.getFullYear();
@@ -44,11 +54,15 @@ function injectBanner() {
       function updateCountdown() {
         const now = new Date();
         const diff = targetDate.getTime() - now.getTime();
+        const hoursN = document.getElementById('hours');
+        const minutesN = document.getElementById('minutes');
+        const secondsN = document.getElementById('seconds');
+
 
         if (diff <= 0) {
-          document.getElementById('hours').textContent = '00';
-          document.getElementById('minutes').textContent = '00';
-          document.getElementById('seconds').textContent = '00';
+          if (hoursN) hoursN.textContent = '00';
+          if (minutesN) minutesN.textContent = '00';
+          if (secondsN) secondsN.textContent = '00';
           clearInterval(countdownInterval);
           return;
         }
@@ -56,9 +70,9 @@ function injectBanner() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        if (hoursN) hoursN.textContent = hours.toString().padStart(2, '0');
+        if (minutesN) minutesN.textContent = minutes.toString().padStart(2, '0');
+        if (secondsN) secondsN.textContent = seconds.toString().padStart(2, '0');
       }
 
       const countdownInterval = setInterval(updateCountdown, 1000);
@@ -69,6 +83,7 @@ function injectBanner() {
 
 function initBannerScroll() {
   const banner = document.getElementById('banner');
+  if (!banner) return; // Null Protection
   let lastScrollY = window.scrollY;
 
   banner.classList.add('visible');
