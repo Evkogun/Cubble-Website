@@ -86,6 +86,7 @@ body::after {
     z-index: 1;
     overflow: hidden;
     animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1);
+    margin-top: 45px;
 }
 
 @keyframes fadeIn {
@@ -96,7 +97,7 @@ body::after {
 .signUp-container::before {
     content: "";
     position: absolute;
-    top: -60px;
+    top: -200px;
     right: -60px;
     width: 120px;
     height: 120px;
