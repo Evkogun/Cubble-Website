@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Repeat until far enough
       do {
           isTooClose = false;
-          startX = Math.random() * window.innerWidth;
-          startY = Math.random() * window.innerHeight;
+          startX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
+          startY = (0.05 + 0.9 * Math.random()) * window.innerWidth;
 
           // Check against other filler bubbles
           for (const other of fillerBubbles) {
