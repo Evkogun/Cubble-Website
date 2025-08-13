@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
           startX = Math.random() * window.innerWidth;
           startY = Math.random() * window.innerHeight;
 
+          // Check against other filler bubbles
           for (const other of fillerBubbles) {
               const dx = startX - parseFloat(other.dataset.baseX);
               const dy = startY - parseFloat(other.dataset.baseY);
@@ -191,6 +192,43 @@ document.addEventListener('DOMContentLoaded', () => {
               if (dist < otherRadius + thisRadius + minDistance) {
                   isTooClose = true;
                   break;
+              }
+          }
+
+          // Check against the start and end positions of the "real" bubbles
+          if (!isTooClose) {
+              const rect = container.getBoundingClientRect();
+              const centreX = rect.left + rect.width / 2;
+              const centreY = window.innerHeight / 2;
+              const radius = 400;
+
+              for (const main of bubbles) {
+                  const mainStartX = parseFloat(main.dataset.startX);
+                  const mainStartY = parseFloat(main.dataset.startY);
+                  const angleRad = (parseFloat(main.dataset.angle) * Math.PI) / 180;
+                  const targetX = centreX + radius * Math.cos(angleRad);
+                  const targetY = centreY + radius * Math.sin(angleRad);
+
+                  const thisRadius = size / 2;
+                  const mainRadius = 50; 
+
+                  // Check against start position
+                  const dxStart = startX - mainStartX;
+                  const dyStart = startY - mainStartY;
+                  const distStart = Math.sqrt(dxStart * dxStart + dyStart * dyStart);
+                  if (distStart < mainRadius + thisRadius + minDistance) {
+                      isTooClose = true;
+                      break;
+                  }
+
+                  // Check against target position
+                  const dxTarget = startX - targetX;
+                  const dyTarget = startY - targetY;
+                  const distTarget = Math.sqrt(dxTarget * dxTarget + dyTarget * dyTarget);
+                  if (distTarget < mainRadius + thisRadius + minDistance) {
+                      isTooClose = true;
+                      break;
+                  }
               }
           }
       } while (isTooClose);
