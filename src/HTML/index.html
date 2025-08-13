@@ -11,6 +11,8 @@
   <title>Cubble</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/bubble.css">
+  <link rel="stylesheet" href="../css/card-swipe.css">
   <meta name="description" content="Cubble - A mindful alternative to traditional dating apps focusing on group-based authentic connections">
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="manifest" href="../site.webmanifest">
@@ -26,99 +28,141 @@
     </div>
 
     <div id="stuff-we-do">
-      <h2 style="text-align: center; margin-bottom: 24px;">What You Can Do with Cubble</h2>
-      <div class="stuff-container">
-        <div class="stuff-box">
-          <div>
-            <img class="stuff-img" src="../img/temp.jpg" alt="Group Chat">
-            <h3>Join a group of 10 people and spark real conversations</h3>
-            <p>Form your group, talk for a while, and see who clicks.</p>
-          </div>
-        </div>
-
-        <div class="stuff-box">
-          <div>
-            <img class="stuff-img" src="../img/temp.jpg" alt="Shared Interests">
-            <h3>Connect, chat and explore shared interests safely</h3>
-            <p>Group up around activities or topics you love.</p>
-          </div>
-        </div>
-
-        <div class="stuff-box">
-          <div>
-            <img class="stuff-img" src="../img/temp.jpg" alt="Meetup Confidence">
-            <h3>Meet up with confidence, friends or dates, your way</h3>
-            <p>From chat to meetup: build friendships or spark romance.</p>
-          </div>
-        </div>
-      </div>
+      <h2>See What's New</h2>
+      <div id="stuff-container"></div>
       
-      <div id="safe-space">
-        <h2>Recovering and Creating a Safe Space for You</h2>
-        <p>
-          We've designed Cubble to be a more mindful alternative to traditional dating apps,
-          less pressure, less noise, and no exploitation.
-        </p>
-        <button class="cta-button">See What's New</button>
-      </div>
+      <section id="safe-space">
+        <div class="safe-space__container">
+          <h2 class="safe-space__headline">Recovering and Creating a Safe Space for You</h2>
+          <p class="safe-space__subcopy">
+            We've designed Cubble to be a more mindful alternative to traditional dating apps,
+            less pressure, less noise, and no exploitation.
+          </p>
+          <button class="safe-space__cta">
+            <span>See What's New</span>
+            <svg class="safe-space__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="safe-space__decoration"></div>
+        <div class="safe-space__decoration"></div>
+      </section>
 
-      <div id="why-us">
-        <h2>Why Us</h2>
-        <p>
-          Cubble isn't just another dating app. We focus on authenticity, emotional safety,
-          and meaningful group-based interaction to help you connect better, without the swipe fatigue.
-        </p>
-        <button class="cta-button">Learn More</button>
-      </div>
+      <section id="why-us">
+        <div class="why-us__container">
+          <div class="why-us__header">
+            <h2 class="why-us__headline">Why Us</h2>
+            <p class="why-us__subtitle">
+              Cubble isn't just another dating app. We focus on authenticity, emotional safety,
+              and meaningful group-based interaction to help you connect better, without the swipe fatigue.
+            </p>
+          </div>
+          <div class="why-us__grid">
+            <div class="why-us__feature">
+              <div class="why-us__icon">
+                <div class="why-us__icon-inner"></div>
+              </div>
+              <h3 class="why-us__feature-title">Authentic Connections</h3>
+              <p class="why-us__feature-description">
+                Connect with real people in meaningful group conversations instead of endless swiping.
+              </p>
+            </div>
+            <div class="why-us__feature">
+              <div class="why-us__icon">
+                <div class="why-us__icon-inner"></div>
+              </div>
+              <h3 class="why-us__feature-title">Emotional Safety</h3>
+              <p class="why-us__feature-description">
+                AI-powered moderation and community guidelines ensure a respectful environment for everyone.
+              </p>
+            </div>
+            <div class="why-us__feature">
+              <div class="why-us__icon">
+                <div class="why-us__icon-inner"></div>
+              </div>
+              <h3 class="why-us__feature-title">No Exploitation</h3>
+              <p class="why-us__feature-description">
+                Built with your wellbeing in mind, not engagement metrics or ad revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section class="bubble-section">
+        <div id="filler-bubbles"></div>
         <div id="bubble-container">
           <div class="bubble"
               data-angle="0"
               data-title="Chat Safely"
-              data-text="Start genuine group conversations."
+              data-text="Start genuine group conversations with people who share your interests."
               data-img="../img/temp.jpg">
-            1
-            <img class="bubble-img" alt="Chat Safely" />
+            <span class="bubble-number">1</span>
+            <div class="bubble-inner-content">
+              <img class="bubble-img" alt="" />
+              <h3 class="bubble-title"></h3> 
+              <p class="bubble-text"></p>
+            </div>
           </div>
+    
           <div class="bubble"
               data-angle="72"
               data-title="Find Friends"
-              data-text="Meet people who share your interests."
+              data-text="Meet people who share your interests and build meaningful connections."
               data-img="../img/temp.jpg">
-            2
-            <img class="bubble-img" alt="Find Friends" />
+            <span class="bubble-number">2</span>
+            <div class="bubble-inner-content">
+              <img class="bubble-img" alt="" />
+              <h3 class="bubble-title"></h3>
+              <p class="bubble-text"></p>
+            </div>
           </div>
+    
           <div class="bubble"
               data-angle="144"
               data-title="AI Help"
-              data-text="Smart prompts for easier intros."
+              data-text="Smart prompts and conversation starters make introductions easier."
               data-img="../img/temp.jpg">
-            3
-            <img class="bubble-img" alt="AI Help" />
+            <span class="bubble-number">3</span>
+            <div class="bubble-inner-content">
+              <img class="bubble-img" alt="" />
+              <h3 class="bubble-title"></h3>
+              <p class="bubble-text"></p>
+            </div>
           </div>
+    
           <div class="bubble"
               data-angle="216"
               data-title="Meet IRL"
-              data-text="Turn chats into real meetups."
+              data-text="Turn online chats into real-world meetups and lasting friendships."
               data-img="../img/temp.jpg">
-            4
-            <img class="bubble-img" alt="Meet IRL" />
+            <span class="bubble-number">4</span>
+            <div class="bubble-inner-content">
+              <img class="bubble-img" alt="" />
+              <h3 class="bubble-title"></h3>
+              <p class="bubble-text"></p>
+            </div>
           </div>
+    
           <div class="bubble"
               data-angle="288"
               data-title="Verified Safe"
-              data-text="Trust and safety, always."
+              data-text="Trust and safety are our priority with verified profiles and moderation."
               data-img="../img/Logo.jpg">
-            5
-            <img class="bubble-img" alt="Verified Safe" />
+            <span class="bubble-number">5</span>
+            <div class="bubble-inner-content">
+              <img class="bubble-img" alt="" />
+              <h3 class="bubble-title"></h3>
+              <p class="bubble-text"></p>
+            </div>
           </div>
         </div>
+        
       <div class="bubble-section-content">
         <h2>Welcome</h2>
-        <p>Heres some information about what we do.</p>
+        <p>Here's some information about what we do.</p>
       </div>
-
       </section>
 
       <div id="bubble-detail" class="hidden">
@@ -179,6 +223,7 @@
   </main>
 
   <div id="footer-container"></div>
+  <script src="../js/card-swipe.js"></script>
 </body>
 
 </html>
