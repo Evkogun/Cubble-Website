@@ -36,10 +36,6 @@
   transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(6);
 }
 
-.bubble.active .bubble-number {
-  display: none;
-}
-
 .bubble-inner-content {
   display: none;
   position: absolute;
