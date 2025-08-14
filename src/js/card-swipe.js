@@ -316,7 +316,7 @@ class CardSwipeManager {
           <div class="why-us__header">
             <h2 class="why-us__headline">Why Choose Cubble</h2>
             <p class="why-us__subtitle">
-              Cubble isn't just another dating app. We focus on authenticity, emotional safety,
+              Cubble isn't just another connecion app. We focus on authenticity, emotional safety,
               and meaningful connections through thoughtfully designed group experiences.
             </p>
           </div>
