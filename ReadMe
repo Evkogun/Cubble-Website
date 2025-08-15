@@ -3,3 +3,32 @@ npm install
 
 Use this command to test how your page looks with banner/footer
 npm run start
+
+-- Tasklist -- 
+
+## Not Started
+- [ ] Expand Footer — *assigned to:* 
+- [ ] Fix card-swipe to better handle resizing — *assigned to:* 
+- [ ] Implement better GitHub controls + branches — *assigned to:* 
+- [ ] Add Logo + Hyperlink to banner — *assigned to:* 
+- [ ] Implement global font — *assigned to:* 
+- [ ] Create list of inspirational websites — *assigned to:* 
+- [ ] Implement content on see what’s new — *assigned to:* 
+- [ ] Implement SPA Auth0 page (may be temporary) — *assigned to:* 
+- [ ] Fix right side padding issue — *assigned to:* 
+- [ ] Implement Logo into Favicon — *assigned to:* 
+- [ ] Improve “how cubble works” design — *assigned to:* 
+- [ ] Integrate more images into web design — *assigned to:* 
+- [ ] Implement welcome content — *assigned to:* 
+- [ ] Create global color scheme by migrating root of card-swipe — *assigned to:* 
+- [ ] Integrate custom bubbles into background and active — *assigned to:* 
+- [ ] Add event listener for resizing in bubble — *assigned to:* 
+- [ ] Fix bubble reset glitch — *assigned to:* 
+- [ ] Find and integrate stock images — *assigned to:* 
+- [ ] Expand mobile only banner menu — *assigned to:* 
+
+## In Progress
+- [ ] *Add tasks here as they start* — *assigned to:* 
+
+## Complete
+- [x] *Add tasks here as they finish* — *assigned to:* 
