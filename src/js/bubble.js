@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       do {
           isTooClose = false;
           startX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
-          startY = (0.05 + 0.9 * Math.random()) * window.innerWidth;
+          startY = (0.05 + 0.9 * Math.random()) * window.innerHeight;
 
           // Check against other filler bubbles
           for (const other of fillerBubbles) {
@@ -275,8 +275,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fillerBubbles.forEach((bub) => {
       const depth = parseFloat(bub.dataset.depth);
-      const baseY = parseFloat(bub.dataset.baseY);
-      const newY = baseY + scrollY * depth;
+      let baseY = parseFloat(bub.dataset.baseY);
+      let newY = baseY + scrollY * depth;
+      bub.style.transform = `translate(${bub.dataset.baseX}px, ${newY}px)`;
+
+      if (newY < -100) { 
+        bub.dataset.baseX = (0.1 + 0.8 * Math.random()) * window.innerWidth;
+        newY = window.innerHeight + 100;
+        bub.dataset.baseY = newY - scrollY * depth; 
+      }
+
       bub.style.transform = `translate(${bub.dataset.baseX}px, ${newY}px)`;
 
       const opacity = Math.max(0, 1 - (scrollY - triggerPoint) / fadeDistance);
