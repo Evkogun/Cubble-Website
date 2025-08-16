@@ -7,6 +7,27 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
+:root {
+  /* Colors */
+  --primary-light: #5cef9e;
+  --primary: #04bfad;
+  --primary-dark: #025159;
+
+  --secondary-light: #35528c;
+  --secondary: #735a8c;
+  --secondary-dark: #252359;
+
+  --tertiary-light: #f25922;
+  --tertiary: #f20505;
+  --tertiary-dark: #73020c;
+
+  /* Fonts */
+  --font-family: "Quicksand", sans-serif;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-bold: 700;
+}
+
   html, body, #root {
     height: 100%;
     width: 100%;
