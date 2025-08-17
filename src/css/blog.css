@@ -1,0 +1,256 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #4A9B8E; 
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 20px;
+  padding-top: 80px; 
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgb(255, 255, 255);
+  border: 3px solid #2E7A6B; 
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+a {
+  color: #4A9B8E; 
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 0.8rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+main section {
+  padding: 1.5rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Hero section */
+.hero {
+  background-color: #f8fffe;
+  border: 1.5px solid #B8E6D3;
+  box-shadow: 0 2px 6px rgba(74, 155, 142, 0.2);
+  text-align: center;
+}
+
+.hero h1 {
+  color: #2E7A6B;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Blog posts styling */
+.recent-posts, .previous-posts {
+  background-color: #ffffff;
+  border-left: 4px solid #4A9B8E;
+  box-shadow: 0 2px 6px rgba(74, 155, 142, 0.2);
+}
+
+.posts-grid, .posts-list {
+  margin-top: 1.5rem;
+}
+
+.post-card {
+  background: #f8fffe;
+  border: 1px solid #B8E6D3;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(74, 155, 142, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 155, 142, 0.2);
+}
+
+.post-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5f2ef;
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-date-column {
+  min-width: 120px;
+}
+
+.post-content-column {
+  flex: 1;
+}
+
+.post-date {
+  color: #4A9B8E;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.post-content h3 {
+  margin: 0 0 0.5rem 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.post-content h3 a {
+  color: #2E7A6B;
+  font-weight: 600;
+}
+
+.post-content h3 a:hover {
+  color: #4A9B8E;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.author {
+  color: #4A9B8E;
+}
+
+.read-time {
+  color: #888;
+}
+
+/* Load more button */
+.load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.load-more-btn {
+  background-color: #4A9B8E;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #2E7A6B;
+}
+
+/* Newsletter signup */
+.newsletter-signup {
+  background-color: #f8fffe;
+  border: 2px solid #B8E6D3;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(74, 155, 142, 0.2);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.newsletter-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem;
+  border: 2px solid #B8E6D3;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  border-color: #4A9B8E;
+}
+
+.newsletter-form button {
+  background-color: #4A9B8E;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #2E7A6B;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    padding-top: 70px;
+  }
+  
+  main {
+    padding: 0.5rem;
+  }
+  
+  main section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .post-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .post-date-column {
+    min-width: auto;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .newsletter-form input {
+    min-width: auto;
+  }
+}
