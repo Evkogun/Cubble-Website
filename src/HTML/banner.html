@@ -1,321 +1,293 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banner with Notification Bar</title>
   <style>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+        'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
 
-/* Base */
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #f8f9fa;
-  padding-top: 70px; 
-}
+    #banner {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 40px;
+      /* shifted down to below notification bar */
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
 
-/* Banner */
-#banner {
-  background: linear-gradient(135deg, #2e8b8b 0%, #48a999 50%, #5abfa7 100%);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 12px rgba(46, 139, 139, 0.15);
-  will-change: transform;
-}
+    #banner.visible {
+      transform: translateY(0);
+    }
 
-#banner.hidden {
-  transform: translateY(-100%);
-}
+    .banner-content {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 15px 30px;
+      position: relative;
+    }
 
-#banner.visible {
-  transform: translateY(0);
-}
+    .banner-content p {
+      margin: 0;
+      font-weight: bold;
+      font-size: 20px;
+      margin-right: auto;
+    }
 
-.banner-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 30px;
-  max-width: 1200px; 
-  margin: 0 auto;
-  gap: 20px;
-  position: relative;
-}
+    .banner-nav {
+      display: flex;
+      gap: 10px;
+      margin-right: 30px;
+    }
 
-/* Logo + company name - white container that pops */
-.brand-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #2e8b8b;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  padding: 8px 16px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-}
+    .banner-nav a,
+    .icon-btn {
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-radius: 8px;
+      color: #666;
+    }
 
-.brand-container:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #1f5f5f;
-}
+    .banner-nav a {
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+    }
 
-.brand-container:active {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-}
+    .icon-btn {
+      background: none;
+      border: none;
+      padding: 8px;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.company-name {
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: -0.5px;
-  text-shadow: none;
-}
+    .banner-nav a:hover,
+    .icon-btn:hover {
+      color: #007bff;
+      background-color: rgba(0, 123, 255, 0.08);
+      transform: translateY(-1px);
+    }
 
-.logo-container {
-  height: 36px;
-  display: flex;
-  align-items: center;
-}
+    .banner-nav a:active,
+    .icon-btn:active {
+      transform: translateY(0);
+      background-color: rgba(0, 123, 255, 0.15);
+    }
 
-.logo {
-  height: 36px;
-  width: auto;
-}
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      background-color: white;
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 8px 0;
+    }
 
-/* Center section with navigation */
-.center-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-  justify-content: center;
-}
+    .mobile-menu a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-/* Navigation */
-.banner-nav {
-  display: flex;
-  gap: 4px;
-}
+    .mobile-menu a:hover {
+      background-color: #f1f1f1;
+    }
 
-.banner-nav a {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  position: relative;
-  font-size: 15px;
-}
+    .mobile-menu.active {
+      display: block;
+    }
 
-.banner-nav a:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  transform: translateY(-1px);
-}
+    @media (max-width: 768px) {
+      .banner-nav {
+        display: none;
+      }
 
-.banner-nav a:active {
-  transform: translateY(0);
-  background: rgba(255, 255, 255, 0.25);
-}
+      .mobile-menu {
+        left: auto;
+        right: 20px;
+      }
+    }
 
-/* Icon buttons */
-.icon-buttons {
-  display: flex;
-  gap: 6px;
-  position: relative;
-}
+    @media (min-width: 769px) {
+      .mobile-only {
+        display: none;
+      }
+    }
 
-.icon-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  font-size: 16px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-}
+    /* Notification bar styles */
+    #notificationBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1100;
+      background: linear-gradient(90deg, #1f3a3a 0%, #1f3a3a 50%, #0f1f1f 100%);
+      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+        'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      gap: 12px;
+    }
 
-.icon-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.3);
-}
+    #notificationBar .message {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
 
-.icon-btn:active {
-  transform: translateY(0);
-  background: rgba(255, 255, 255, 0.25);
-}
+    #notificationBar .countdown {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: monospace;
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+    }
 
-/* Mobile menu */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  background: white;
-  min-width: 200px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  z-index: 1001;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
+    #notificationBar .countdown div {
+      background-color: #2a4a4a;
+      border-radius: 4px;
+      padding: 2px 6px;
+      min-width: 28px;
+      text-align: center;
+    }
 
-.mobile-menu a {
-  color: #333;
-  padding: 16px 20px;
-  text-decoration: none;
-  display: block;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
+    #notificationBar .sparkle {
+      color: #facc15;
+      font-size: 18px;
+      user-select: none;
+    }
 
-.mobile-menu a:last-child {
-  border-bottom: none;
-}
+    #notificationBar button.register-btn {
+      background-color: white;
+      color: #1f3a3a;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.2s ease;
+    }
 
-.mobile-menu a:hover {
-  background: linear-gradient(135deg, #f0f9f9 0%, #e8f5f5 100%);
-  color: #2e8b8b;
-}
+    #notificationBar button.register-btn:hover {
+      background-color: #f0f0f0;
+    }
 
-.mobile-menu.active {
-  display: block;
-  animation: slideDown 0.3s ease;
-}
+    #notificationBar button.close-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    #notificationBar button.close-btn:hover {
+      color: #ccc;
+    }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .banner-content {
-    padding: 12px 20px;
-  }
-  
-  .center-section {
-    display: none;
-  }
-  
-  .company-name {
-    font-size: 18px;
-  }
-  
-  .logo {
-    height: 32px;
-  }
-  
-  .logo-container {
-    height: 32px;
-  }
-  
-  .brand-container {
-    padding: 6px 12px;
-    gap: 10px;
-  }
-  
-  .mobile-menu {
-    right: 0;
-    min-width: 200px;
-  }
-}
+    @media (max-width: 480px) {
+      #notificationBar {
+        font-size: 12px;
+        padding: 6px 12px;
+        gap: 8px;
+      }
 
-@media (min-width: 769px) {
-  .mobile-only {
-    display: none;
-  }
-}
+      #notificationBar .countdown div {
+        min-width: 24px;
+        padding: 2px 4px;
+      }
 
-/* Simple icon replacements */
-.envelope-icon::before { content: "✉"; }
-.user-icon::before { content: "👤"; }
-.menu-icon::before { content: "☰"; }
-
+      #notificationBar button.register-btn {
+        padding: 3px 10px;
+        font-size: 12px;
+      }
+    }
   </style>
+  <!-- Google Fonts: Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <nav id="banner">
+  <div id="notificationBar">
+    <div class="message">
+      <span class="wave" aria-hidden="true">👋</span>
+      <span>Hey! Reserve your slot for Cubble’s exclusive access once it launches.</span>
+    </div>
+    <div class="countdown" aria-label="Countdown timer">
+      <div id="hours">00</div>
+      <div>Hrs</div>
+      <div id="minutes">00</div>
+      <div>Min</div>
+      <div id="seconds">00</div>
+      <div>Sec</div>
+    </div>
+    <div class="sparkle" aria-hidden="true">✨</div>
+    <button class="register-btn" type="button">Register Now</button>
+    <button class="close-btn" aria-label="Close notification" type="button" id="closeBtn">×</button>
+  </div>
+
+  <div id="banner" class="visible">
     <div class="banner-content">
-      <!-- Logo and Company Name -->
-      <div class="brand-container">
-        <div class="logo-container">
-          <img src="../img/LogoCubble.png" alt="Company Logo" class="logo" />
-        </div>
-        <span class="company-name">Cubble</span>
-      </div>
+      <p>Logo and such</p>
+      <nav class="banner-nav">
+        <a href="index.html">Home</a>
+        <a href="apps.html">Apps</a>
+        <a href="about.html">About Us</a>
+      </nav>
+      <button class="icon-btn envelope-btn" aria-label="Messages">✉️</button>
+      <button class="icon-btn user-btn" aria-label="Profile">👤</button>
+      <button class="icon-btn menu-btn mobile-only" id="hamburger-button" aria-label="Menu">☰</button>
 
-      <!-- Navigation (hidden on mobile) -->
-      <div class="center-section">
-        <div class="banner-nav">
-          <a href="index.html">Home</a>
-          <a href="apps.html">Apps</a>
-          <a href="about.html">About Us</a>
-          <a href="blog.html">Blog</a>
-        </div>
-      </div>
-
-      <!-- Icon Buttons -->
-      <div class="icon-buttons">
-        <button class="icon-btn envelope-btn" aria-label="Messages">
-          <span class="envelope-icon"></span>
-        </button>
-
-        <button class="icon-btn user-btn" aria-label="Profile">
-          <span class="user-icon"></span>
-        </button>
-
-        <button class="icon-btn menu-btn mobile-only" id="hamburger-button" aria-label="Menu">
-          <span class="menu-icon"></span>
-        </button>
-
-        <!-- Mobile Menu Dropdown -->
-        <div class="mobile-menu" id="mobile-menu">
-          <a href="index.html">Home</a>
-          <a href="apps.html">Apps</a>
-          <a href="about.html">About Us</a>
-          <a href="blog.html">Blog</a>
-        </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="apps.html">Apps</a>
+        <a href="about.html">About Us</a>
       </div>
     </div>
-  </nav>
+  </div>
 
+  
 </body>
 
 </html>
