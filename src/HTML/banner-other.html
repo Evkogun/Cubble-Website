@@ -28,17 +28,19 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.5s ease, opacity 0.3s ease;
   box-shadow: 0 4px 12px rgba(46, 139, 139, 0.15);
   will-change: transform;
 }
 
 #banner.hidden {
   transform: translateY(-100%);
+  opacity: 0;
 }
 
 #banner.visible {
   transform: translateY(0);
+  opacity: 1;
 }
 
 .banner-content {
