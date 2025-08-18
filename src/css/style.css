@@ -7,7 +7,68 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
+
+ 
 :root {
+
+
+  /* This is literally just card-swipe */
+  --primary-bg: #ffffff;
+  --secondary-bg: #f8f9fa;
+  --accent-bg: #f0f2f5;
+  --text-primary: #2c3e50;
+  --text-secondary: #6c757d;
+  --text-muted: #868e96;
+  --accent-purple: #5b4df2;
+  --accent-pink: #ff3085;
+  --accent-blue: #2196f3;
+  --accent-green: #00e676;
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.15);
+  --border-light: rgba(0, 0, 0, 0.08);
+  
+
+  --gradient-slider: linear-gradient(135deg, rgba(65, 49, 240, 0.25) 0%, rgba(240, 14, 108, 0.25) 50%, rgba(5, 102, 181, 0.25) 100%);
+  --gradient-safe: linear-gradient(135deg, rgba(33, 150, 243, 0.25) 0%, rgba(0, 230, 118, 0.25) 50%, rgba(91, 77, 242, 0.25) 100%);
+  --gradient-why: linear-gradient(135deg, rgba(255, 48, 133, 0.25) 0%, rgba(91, 77, 242, 0.25) 50%, rgba(33, 150, 243, 0.25) 100%);
+  
+
+  --gradient-card-slider: linear-gradient(145deg, rgba(91, 77, 242, 0.08) 0%, rgba(255, 48, 133, 0.08) 100%);
+  --gradient-card-safe: linear-gradient(145deg, rgba(33, 150, 243, 0.08) 0%, rgba(0, 230, 118, 0.08) 100%);
+  --gradient-card-why: linear-gradient(145deg, rgba(255, 48, 133, 0.08) 0%, rgba(91, 77, 242, 0.08) 100%);
+  
+
+  --gradient-card-slider-hover: linear-gradient(145deg, rgba(91, 77, 242, 0.15) 0%, rgba(255, 48, 133, 0.15) 100%);
+  --gradient-card-safe-hover: linear-gradient(145deg, rgba(33, 150, 243, 0.15) 0%, rgba(0, 230, 118, 0.15) 100%);
+  --gradient-card-why-hover: linear-gradient(145deg, rgba(255, 48, 133, 0.15) 0%, rgba(91, 77, 242, 0.15) 100%);
+
+  --rgba-purple-12: rgba(91, 77, 242, 0.12);
+  --rgba-purple-08: rgba(91, 77, 242, 0.08);
+  --rgba-purple-20: rgba(91, 77, 242, 0.2);
+  --rgba-purple-02: rgba(91, 77, 242, 0.02);
+  --rgba-pink-02: rgba(255, 48, 133, 0.02);
+  --rgba-purple-06: rgba(91, 77, 242, 0.06);
+  --rgba-pink-06: rgba(255, 48, 133, 0.06);
+  --rgba-black-05: rgba(0, 0, 0, 0.05);
+  --rgba-purple-10: rgba(91, 77, 242, 0.1);
+  --rgba-purple-15: rgba(91, 77, 242, 0.15);
+  --rgba-purple-25: rgba(91, 77, 242, 0.25);
+  --rgba-pink-15: rgba(255, 48, 133, 0.15);
+  --rgba-pink-30: rgba(255, 48, 133, 0.3);
+  --rgba-pink-03: rgba(255, 48, 133, 0.03);
+  --rgba-purple-03: rgba(91, 77, 242, 0.03);
+  --rgba-pink-08: rgba(255, 48, 133, 0.08);
+  --rgba-purple-08-light: rgba(91, 77, 242, 0.08);
+  --rgba-pink-40: rgba(255, 48, 133, 0.4);
+  --rgba-blue-30: rgba(33, 150, 243, 0.3);
+  --rgba-blue-40: rgba(33, 150, 243, 0.4);
+  --rgba-black-30: rgba(0, 0, 0, 0.3);
+  --rgba-black-50: rgba(0, 0, 0, 0.5);
+
+
+
+
   /* Colors */
   --primary-light: #5cef9e;
   --primary: #04bfad;
