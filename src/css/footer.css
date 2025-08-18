@@ -1,7 +1,7 @@
 /* footer.css */
 .site-footer {
-  background-color: #222;
-  color: #eee;
+  background-color: #fff;
+  color: #222;
   font-family: Arial, sans-serif;
   padding: 40px 20px 20px;
 }
@@ -41,7 +41,7 @@
 }
 
 .footer-nav a {
-  color: #eee;
+  color: #333;
   text-decoration: none;
   font-size: 0.95rem;
 }
@@ -55,7 +55,7 @@
   margin-right: 12px;
   font-size: 0.95rem;
   text-decoration: none;
-  color: #eee;
+  color: #333;
 }
 
 .footer-social a:hover {
@@ -64,7 +64,7 @@
 
 .footer-legal {
   text-align: center;
-  border-top: 1px solid #444;
+  border-top: 1px solid #ccc;
   margin-top: 20px;
   padding-top: 12px;
   font-size: 0.85rem;
